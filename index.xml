@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Simon Blum</title>
-    <link>http://yourSiteHere/</link>
+    <link>http://guizmo51.github.io/</link>
     <description>Recent content on Simon Blum</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
     <lastBuildDate>Mon, 16 Mar 2015 14:24:31 +0100</lastBuildDate>
-    <atom:link href="http://yourSiteHere/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://guizmo51.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>boostAdopt</title>
-      <link>http://yoursitehere/retours-dexperiences/boostadopt/</link>
+      <link>http://guizmo51.github.io/retours-dexperiences/boostadopt/</link>
       <pubDate>Mon, 16 Mar 2015 14:24:31 +0100</pubDate>
       
-      <guid>http://yoursitehere/retours-dexperiences/boostadopt/</guid>
+      <guid>http://guizmo51.github.io/retours-dexperiences/boostadopt/</guid>
       <description>
 
 &lt;p&gt;Tout ce projet s&amp;rsquo;articule autour du site AdopteUnMec.com . Il s&amp;rsquo;agit d&amp;rsquo;un site de rencontre Français lancé en 2008. Il a fait le buzz avec un système de charme auxquels répondent les femmes qui ont la possibilité de lancer la conversation. D&amp;rsquo;un point de vue business model le site en a semble t-il eu plusieurs. Tout le site était gratuit au départ, puis a lancé des systèmes d&amp;rsquo;abonnements ou de barrière horaires  (accès impossible entrer 18h et 1h pour les abonnés non-payants). Je ne suis pas radin mais payer minimum 30€ par mois pour ce genre de service : sans moi.&lt;/p&gt;
@@ -104,10 +104,10 @@ J&amp;rsquo;ai reçu une mise en demeure (bien que le site n&amp;rsquo;était pe
     
     <item>
       <title>Qui suis-je ?</title>
-      <link>http://yoursitehere/quisuisje/</link>
+      <link>http://guizmo51.github.io/quisuisje/</link>
       <pubDate>Mon, 02 Mar 2015 13:41:02 +0100</pubDate>
       
-      <guid>http://yoursitehere/quisuisje/</guid>
+      <guid>http://guizmo51.github.io/quisuisje/</guid>
       <description>&lt;p&gt;Je m&amp;rsquo;appelle Simon j&amp;rsquo;ai 26 ans je suis ingénieur web. Je suis passioné par le web et plus spécifiquement le développement. Tous les autres aspects du web m&amp;rsquo;intéressent. Mon langages de prédilection est PHP mais j&amp;rsquo;utilise aussi NodeJS, Javascript et cie :)&lt;/p&gt;
 
 &lt;p&gt;Outre l&amp;rsquo;informatique je suis passinné par le sport et notamment la course d&amp;rsquo;orientation (si si, c&amp;rsquo;est un sport !). Originaire de Reims je suis actuellement sur Paris.&lt;/p&gt;
@@ -118,10 +118,10 @@ J&amp;rsquo;ai reçu une mise en demeure (bien que le site n&amp;rsquo;était pe
     
     <item>
       <title>Pourquoi ce blog ?</title>
-      <link>http://yoursitehere/apropos/</link>
+      <link>http://guizmo51.github.io/apropos/</link>
       <pubDate>Mon, 02 Mar 2015 13:39:19 +0100</pubDate>
       
-      <guid>http://yoursitehere/apropos/</guid>
+      <guid>http://guizmo51.github.io/apropos/</guid>
       <description>&lt;p&gt;Ce blog se veut comme un lieu me pertmettant de partager mes connaissances et mes découvertes. Par le passé je me suis retrouvé confronté à des questions techniques pour lesquelles je ne trouvais aucune réponse. J&amp;rsquo;espère que ce blog permettra d&amp;rsquo;y répondre. Par exemple lors de mon expérience FirefoxOS on trouvait très peu de sujets sur la géolocalisation HTML5 (géolocation) ou IndexedDB Je compte partager et expliquer quelques projets que je vais qualifier de &amp;ldquo;hack&amp;rdquo;. Il ne s&amp;rsquo;agit pas d&amp;rsquo;attaques mais de projets permettant d&amp;rsquo;alléger la charge de travail de l&amp;rsquo;humain en l&amp;rsquo;automatisant. ces projets sont tout à fait légaux. Si vous avez une meilleure dénomination n&amp;rsquo;hésitez pas à me le faire savoir ;-).&lt;/p&gt;
 </description>
     </item>
