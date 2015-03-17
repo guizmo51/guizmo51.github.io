@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Simon Blum</title>
+    <link>http://yourSiteHere/</link>
+    <description>Recent content on Simon Blum</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <lastBuildDate>Mon, 16 Mar 2015 14:24:31 +0100</lastBuildDate>
+    <atom:link href="http://yourSiteHere/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>boostAdopt</title>
+      <link>http://yoursitehere/retours-dexperiences/boostadopt/</link>
+      <pubDate>Mon, 16 Mar 2015 14:24:31 +0100</pubDate>
+      
+      <guid>http://yoursitehere/retours-dexperiences/boostadopt/</guid>
+      <description>
+
+&lt;p&gt;Tout ce projet s&amp;rsquo;articule autour du site AdopteUnMec.com . Il s&amp;rsquo;agit d&amp;rsquo;un site de rencontre Français lancé en 2008. Il a fait le buzz avec un système de charme auxquels répondent les femmes qui ont la possibilité de lancer la conversation. D&amp;rsquo;un point de vue business model le site en a semble t-il eu plusieurs. Tout le site était gratuit au départ, puis a lancé des systèmes d&amp;rsquo;abonnements ou de barrière horaires  (accès impossible entrer 18h et 1h pour les abonnés non-payants). Je ne suis pas radin mais payer minimum 30€ par mois pour ce genre de service : sans moi.&lt;/p&gt;
+
+&lt;p&gt;En 2012 je suis parti d&amp;rsquo;un constat : sur X profils de femmes visités si ta page est intéressante un certain pourcentage reviendra automatiquement et une partie t&amp;rsquo;autoriseras à lui écrire. J&amp;rsquo;ai donc souhaité industrialiser tout ce process. A quoi bon cliquer manuellement alors qu&amp;rsquo;un robot / script peut le faire pour vous ?&lt;/p&gt;
+
+&lt;p&gt;Dans un premier temps j&amp;rsquo;avais fait un vulgaire crawler qui utilisait la partie Desktop du site. Je simulais donc une recherche de 50 ou 100 profils selon des critères déterminés puis les visiter à une certaine fréquence. Tout ce procédé était long mais fonctionnait. L&amp;rsquo;application parsait le DOM HTML et avec un système de modèles resortait les données utiles.&lt;/p&gt;
+
+&lt;p&gt;Un jour j&amp;rsquo;étais frustré de ne pouvoir utiliser mon script entre 18h et 1h du matin (le fameux blocage pour les comptes gratuits). Toutefois je me suis rendu compte que l&amp;rsquo;application Android / iphone pouvait se connecter pendant ce créneau.&lt;/p&gt;
+
+&lt;h2 id=&#34;api-mobile:5d89a49772d283f3ee4fbc1839d2b90e&#34;&gt;API mobile&lt;/h2&gt;
+
+&lt;p&gt;J&amp;rsquo;ai donc décidé d&amp;rsquo;écouter les appels effectués par l&amp;rsquo;application Android. En quelques minutes et avec l&amp;rsquo;aide de Wireshark. En quelques minutes j&amp;rsquo;ai récupéré une série d&amp;rsquo;URL.&lt;/p&gt;
+
+&lt;p&gt;Exemples d&amp;rsquo;url :
+&amp;ldquo;&lt;a href=&#34;http://adopteunmec.com/api/home&amp;quot;&#34;&gt;http://adopteunmec.com/api/home&amp;quot;&lt;/a&gt; &amp;ldquo;connexion&amp;rdquo;
+&amp;ldquo;&lt;a href=&#34;http://adopteunmec.com/api/users&amp;quot;&#34;&gt;http://adopteunmec.com/api/users&amp;quot;&lt;/a&gt; &amp;ldquo;recherche&amp;rdquo;
+&amp;ldquo;&lt;a href=&#34;http://adopteunmec.com/api/users/XXXXX&amp;quot;&#34;&gt;http://adopteunmec.com/api/users/XXXXX&amp;quot;&lt;/a&gt; &amp;ldquo;visite du profil XXXXX&amp;rdquo;
+L&amp;rsquo;API permet aussi de charmer et d&amp;rsquo;envoyer des messages (possible si on a au préalable été autorisé).&lt;/p&gt;
+
+&lt;p&gt;Puis tout le projet initial a été converti en utilisant du JSON comme données en entrées. Cela rendait l&amp;rsquo;application plus rapide puisqu&amp;rsquo;au lieu de charger des pages HTML de plusieurs Mo l&amp;rsquo;appel je chargeais du json de quelques Ko.&lt;/p&gt;
+
+&lt;p&gt;désormais tout fonctionnait : un script php faisait tout le boulot.&lt;/p&gt;
+
+&lt;p&gt;Puis un jour une alert mail automatisée m&amp;rsquo;informe que les scripts ne fonctionnent plus. Après quelques minutes de recherche je me rends compte que le serveur a été blacklisté, il n&amp;rsquo;est plus autorisé à accèder aux serveurs d&amp;rsquo;AdopteUnMec. A ce stade j&amp;rsquo;avais atteint à peu près 100 000 requetes chez eux.&lt;/p&gt;
+
+&lt;p&gt;Il a donc fallu réfléchir à de nouvelles solutions :
+- racheter de nouvelles IP une fois ce pallier de requetes atteint : faisable mais cela a un cout non négligeable
+- utiliser Tor mais je ne souhaitais pas exposer les données sensibles à travers de noeuds corrompus.
+- trouver une solution client en javascript.&lt;/p&gt;
+
+&lt;p&gt;J&amp;rsquo;ai opté pour la dernière solution : réaliser un client Javascript qui se connecterait directement aux serveurs d&amp;rsquo;AdopteUnMec. Cela metterait le code métier exposé à tout le monde mais l&amp;rsquo;IP se connectant aux serveurs serait celle de l&amp;rsquo;utilisateur et non des serveurs.&lt;/p&gt;
+
+&lt;p&gt;Pendant de long mois j&amp;rsquo;ai cherché les solutions permettant d&amp;rsquo;effectuer des appels Ajax vers les serveurs d&amp;rsquo;AdopteUnMec.
+Bien sur la première étape est le cross-origin : c&amp;rsquo;est une sécurité implémentée dans chaque navigateur. Elle s&amp;rsquo;assure qu&amp;rsquo;un navigateur ne se connecte pas à un serveur que ce dernier n&amp;rsquo;a pas autorisé. Cette sécurité est contournable en modifiant les options de chaque navigateur mais pas très confortable pour l&amp;rsquo;utilisateur.
+Une autre solution envisagée était de faire une requete en JSONP pour JSON with Padding. Cela est faisable ainsi grace au fait que le navigateur ne controle pas le &amp;ldquo;same-origin&amp;rdquo; pour les scripts. J&amp;rsquo;ai renoncé à utiliser cette technique car elle nécessite de rajouter le padding sur les données coté serveur ce que je ne peux bien sur pas faire.
+j&amp;rsquo;ai trouvé la oslution finale par hasard : je me suis aperçu que des extensions Chrome pouvaient faire des appels à des serveurs sans déclencher ce problème de &amp;ldquo;cross-origin&amp;rdquo;. Il faut toutefois que les urls des serveurs soient déclarées dans le manifest de l&amp;rsquo;extension. J&amp;rsquo;ai donc decidé de faire une extension Chrome pour effectuer tous les appels aux serveurs d&amp;rsquo;AdopteUnmec.&lt;/p&gt;
+
+&lt;p&gt;Bien que cette solution ne soit pas idéale car elle oblige à utiliser Chrome j&amp;rsquo;ai décidé de l&amp;rsquo;expérimenter pour lancer mon projet boostAdopt.&lt;/p&gt;
+
+&lt;h2 id=&#34;extension-chrome:5d89a49772d283f3ee4fbc1839d2b90e&#34;&gt;Extension Chrome.&lt;/h2&gt;
+
+&lt;p&gt;l&amp;rsquo;objectif de l&amp;rsquo;extension Chrome est de faire les appels Cross-Origin sur les serveurs d&amp;rsquo;AdopteUnMec. Il a donc fallu faire communiquer le Javascript de mon application avec cette extension Chrome. A l&amp;rsquo;origine je pensais que des méthodes simples existaient pour la communication entre extension et le javascript de l&amp;rsquo;application. Ce ne fut pas le cas. Lorsque j&amp;rsquo;envoyais un message depuis le Javascript vers l&amp;rsquo;extension ou inversement ce message était re-capturé par l&amp;rsquo;émetteur ainsi que le destinataire. Suite à ca j&amp;rsquo;ai donc mis en place un système de flag mentionnant l&amp;rsquo;emetteur du message. Ensuite si l&amp;rsquo;émetteur n&amp;rsquo;était pas le destinataire celui-ci était traité. Afin de rendre l&amp;rsquo;extension disponible plus facilement je l&amp;rsquo;ai publié sur le Google Store en ayant un compte développeur. La création de ce dernier a un couut de quelques dollars.&lt;/p&gt;
+
+&lt;h2 id=&#34;le-front:5d89a49772d283f3ee4fbc1839d2b90e&#34;&gt;Le front&lt;/h2&gt;
+
+&lt;p&gt;Le front est la partie visible de l&amp;rsquo;iceberg. C&amp;rsquo;est l&amp;rsquo;applicatiojn en elle-meme et elle doit ^etre fonctionnelle et intuitive. Ce n&amp;rsquo;est pas un effet de mode mais j&amp;rsquo;ai souhaité utiliser AngularJS que je ne maitrisais pas à l&amp;rsquo;époque pour réaliser ce front. J&amp;rsquo;ai été agréablement surprise par ce framework JS. N&amp;rsquo;ayant que très peu de qualité dans tout ce qui est UI / Design je suis parti sur un Bootstrap d&amp;rsquo;autant plus qu&amp;rsquo;une bliblothèque fait cela très bien (&lt;a href=&#34;http://angular-ui.github.io/bootstrap/&#34;&gt;http://angular-ui.github.io/bootstrap/&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id=&#34;le-back-end:5d89a49772d283f3ee4fbc1839d2b90e&#34;&gt;Le back-end&lt;/h2&gt;
+
+&lt;p&gt;Tout le back-end de l&amp;rsquo;application est développé en utilisant CakePHP 2 qu est un petit framework tout à fait adapté à ce genre de projets. Cette partie du projet était assez light mais suffisament sécurisée ayant à gérer des comptes et paypal. En effet la monétisation du projet passait par l&amp;rsquo;utilisation d&amp;rsquo;un compte Paypal&lt;/p&gt;
+
+&lt;h2 id=&#34;business-model:5d89a49772d283f3ee4fbc1839d2b90e&#34;&gt;Business model&lt;/h2&gt;
+
+&lt;p&gt;Je souhaitais monétiser cette application : j&amp;rsquo;ai donc mis en place un système de crédit. Un profil visité = un crédit en moins, reste en suite à définir et adapter la valeur du crédit.&lt;/p&gt;
+
+&lt;h2 id=&#34;communication:5d89a49772d283f3ee4fbc1839d2b90e&#34;&gt;Communication&lt;/h2&gt;
+
+&lt;p&gt;Etant fan de développement de robots en tous genres pour la partie communication j&amp;rsquo;avais décidé de faire un robot crée sous un compte féminin et envoyant des messages invitant essayer le projet boostAdopt.
+Plusieurs freins ont fait diminuer l&amp;rsquo;impact de la communication sur ce projet :
+- la messagerie AdopteUnMec ne permet pas de poster des liens, l&amp;rsquo;utilisateur était donc obligé de copier-coller l&amp;rsquo;URL.
+- la personnalisation du message, bien que j&amp;rsquo;utilisais un message du style &amp;ldquo;Bonjour Benoit,&amp;rdquo; le message pouvait apparaitre comme du spam.
+J&amp;rsquo;ai aussi fait quelques tests de robots permettant d&amp;rsquo;imiter le comportement humain. Ce robot engageait une conversation avant de suggérer un lien vers boostAdopt.&lt;/p&gt;
+
+&lt;p&gt;D&amp;rsquo;autres prospects ont aussi fait remonter leurs craintes concernant la sécurité. Ils pensaient que le site avait pour unique objectif de leurs voler leurs identifiants.&lt;/p&gt;
+
+&lt;p&gt;Une vidéo avait été réalisée permettant de visualiser toutes les fonctionnalités de l&amp;rsquo;application.&lt;/p&gt;
+
+&lt;p&gt;Enfin : un système de parrainage avait été mis en place. En partageant le lien le parrain recevait des crédits à chaque inscription d&amp;rsquo;un filleul.&lt;/p&gt;
+
+&lt;h2 id=&#34;faille-xss:5d89a49772d283f3ee4fbc1839d2b90e&#34;&gt;Faille XSS&lt;/h2&gt;
+
+&lt;p&gt;J&amp;rsquo;avais découvert une faille XSS sur le mini-chat utilisé par AdopteUnMec.
+En effet lors de tests qui m&amp;rsquo;auraient permis de diffuser l&amp;rsquo;URL de boostAdopt de façon cliquable je me suis aperçu que le Javascript de la chatbox n&amp;rsquo;était pas filtré. Lors de mes premiers tests j&amp;rsquo;ai pu de manière très simple faire afficher une alert box à chaque ouverte du chat. Ce javascript était bel et bien exécuté que ça soit coté auteur mais aussi destinataire du message. Un beau jour cette faille avait été corrigée. Une exploitation possible aurait pu etre la réalisation d&amp;rsquo;un message se dupliquant de contacts en contacts.&lt;/p&gt;
+
+&lt;h2 id=&#34;securité-du-site:5d89a49772d283f3ee4fbc1839d2b90e&#34;&gt;Securité du site&lt;/h2&gt;
+
+&lt;p&gt;Lors que le compte auteur d&amp;rsquo;un message était classé &amp;ldquo;spam&amp;rdquo; il n&amp;rsquo;était plus possible d&amp;rsquo;utiliser ce compte. Autre conséquence assez facheuse : chaque compte s&amp;rsquo;inscrivant ou se connectant avec l&amp;rsquo;IP utilisée par ce compte &amp;ldquo;span&amp;rdquo; était automatiquement blacklisté. Cela a rendu compliqué la communication à travers le chat. Un des solutions a été d&amp;rsquo;utiliser Tor et de programmer un refresh d&amp;rsquo;IP fréquent et l&amp;rsquo;utilisation multiple de comptes emails pour s&amp;rsquo;inscrire au site AdopteUnMec et pouvoir continuer à diffuser des messages.&lt;/p&gt;
+
+&lt;h2 id=&#34;fin-du-projet:5d89a49772d283f3ee4fbc1839d2b90e&#34;&gt;Fin du projet&lt;/h2&gt;
+
+&lt;p&gt;Le projet a souffert de plusieurs choses :
+AdopteUnMec était devenu totalement payant, un utilisateur aurait du payer quelques euros supplémentaires par mois en plus d&amp;rsquo;un minimum de 30€.
+J&amp;rsquo;ai reçu une mise en demeure (bien que le site n&amp;rsquo;était pes en France)  et d&amp;rsquo;autres éléments m&amp;rsquo;ont poussé à stopper ce projet boostAdopt.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Qui suis-je ?</title>
+      <link>http://yoursitehere/quisuisje/</link>
+      <pubDate>Mon, 02 Mar 2015 13:41:02 +0100</pubDate>
+      
+      <guid>http://yoursitehere/quisuisje/</guid>
+      <description>&lt;p&gt;Je m&amp;rsquo;appelle Simon j&amp;rsquo;ai 26 ans je suis ingénieur web. Je suis passioné par le web et plus spécifiquement le développement. Tous les autres aspects du web m&amp;rsquo;intéressent. Mon langages de prédilection est PHP mais j&amp;rsquo;utilise aussi NodeJS, Javascript et cie :)&lt;/p&gt;
+
+&lt;p&gt;Outre l&amp;rsquo;informatique je suis passinné par le sport et notamment la course d&amp;rsquo;orientation (si si, c&amp;rsquo;est un sport !). Originaire de Reims je suis actuellement sur Paris.&lt;/p&gt;
+
+&lt;p&gt;Si vous souhaitez en savoir plus sur moi je vous invite à consulter mon CV en ligne.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pourquoi ce blog ?</title>
+      <link>http://yoursitehere/apropos/</link>
+      <pubDate>Mon, 02 Mar 2015 13:39:19 +0100</pubDate>
+      
+      <guid>http://yoursitehere/apropos/</guid>
+      <description>&lt;p&gt;Ce blog se veut comme un lieu me pertmettant de partager mes connaissances et mes découvertes. Par le passé je me suis retrouvé confronté à des questions techniques pour lesquelles je ne trouvais aucune réponse. J&amp;rsquo;espère que ce blog permettra d&amp;rsquo;y répondre. Par exemple lors de mon expérience FirefoxOS on trouvait très peu de sujets sur la géolocalisation HTML5 (géolocation) ou IndexedDB Je compte partager et expliquer quelques projets que je vais qualifier de &amp;ldquo;hack&amp;rdquo;. Il ne s&amp;rsquo;agit pas d&amp;rsquo;attaques mais de projets permettant d&amp;rsquo;alléger la charge de travail de l&amp;rsquo;humain en l&amp;rsquo;automatisant. ces projets sont tout à fait légaux. Si vous avez une meilleure dénomination n&amp;rsquo;hésitez pas à me le faire savoir ;-).&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
